@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tareas</title>
+</head>
+<style>
+  .pendiente{
+    background-color: rgba(141, 230, 41, 0.863);
+    font-size: 25px;
+  }
+
+  .completada{
+    background-color: rgba(241, 46, 46, 0.863);
+    font-size: 25px;
+  }
+  .tareas{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .tarea{
+    border-style: groove;
+    width: 45%;
+    padding: 10px;
+    /* margin: auto; */
+  }
+  button{
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    border-radius: 10px; 
+  }
+</style>
+<body>
+  <h1>Tareas Pendientes:</h1>
+  
+  {% if tareas %}
+    <div class="tareas">
+      {% for tarea in tareas %}
+        <div class="tarea pendiente" id="tarea{{ tarea.id }}">
+          <h2>Título de la tarea: {{ tarea.titulo_tarea }}</h2>
+          <p>Descripción de la tarea: {{ tarea.descrip_tarea }}</p>
+          <p id="estado">Estado de la tarea: Pendiente</p>
+          <p>Fecha límite: {{ tarea.fechaLim_tarea }}</p>
+          <button onclick="eliminar('tarea{{ tarea.id }}')">Eliminar</button>
+          <button onclick="completar('tarea{{ tarea.id }}')" id="{{ tarea.id }}">Completar</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hay tareas pendientes.</p>
+  {% endif %}
+</body>
+<script>
+  function eliminar(id){
+    document.getElementById(id).remove();
+  }
+  function completar(id){
+    document.getElementById(id).classList.remove('pendiente');
+    document.getElementById(id).classList.add('completada');
+    document.getElementById('estado').innerHTML = 'Estado de la tarea: Completada';
+    document.querySelector(`#${id}`).disabled = true;
+  }
+</script>
+</html>

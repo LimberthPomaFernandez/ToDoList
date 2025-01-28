@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  *{
+    background-color: black;
+    font-size: 25px;
+  }
+  fieldset{
+    color: white;
+    width: 45%;
+    margin: auto;
+  }
+  label,input{
+    color: white;
+  }
+  input[type="submit"],input[type="reset"]{
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    border-radius: 10px; 
+  }
+</style>
+<body>
+  <form action="{% url 'crearTarea' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Crear Tarea</legend>
+      <label for=""> Ingrese El titulo de la tarea: <input type="text" name="titulo" maxlength="100" placeholder="Titulo de Tarea"> </label> <br> <br>
+      <label for="">Ingrese la description de la tarea <input type="text" name="descripcion" maxlength="250" placeholder="Descripcion de Tarea"> </label> <br> <br>
+      <label for="">Ingrese la fecha limite: <input type="date" name="fecha" id=""></label> <br> <br>
+      <input type="submit" value="Crear">
+      <input type="reset" value="Limpiar">
+    </fieldset>
+  </form>
+</body>
+</html>
